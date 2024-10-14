@@ -25,17 +25,14 @@ jobs:
         name: report
         path: playwright-report/
         retention-days: 30
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      if: always()
-      with:
-        role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-        aws-region: ${{ secrets.AWS_REGION }}
-    - name: Upload to S3 bucket
+
+    - uses: shallwefootball/s3-upload-action@master
+      name: Upload S3
       id: S3
-      if: always()
-      env:
-         REPORT_DIR: playwright-report-${{ github.run_id }}
-      run: |
-         echo "REPORT_DIR=$REPORT_DIR" >> $GITHUB_ENV
-         aws s3 cp playwright-report/. s3://${{ secrets.AWS_S3_BUCKET }}/$REPORT_DIR --recursive
+      with:
+        aws_key_id: ${{ secrets.AWS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_bucket: my-automation-report
+        source_dir: 'playwright-report/'
+    - name: Link to report
+      run: echo "https://my-automation-report.s3-ap-southeast-2.amazonaws.com/${{steps.S3.outputs.object_key}}/index.html"
