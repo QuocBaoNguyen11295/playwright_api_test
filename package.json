@@ -1,0 +1,31 @@
+{
+  "name": "playwright_api_test",
+  "version": "1.0.0",
+  "description": "API Test with playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "start": "npm run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuocBaoNguyen11295/playwright_api_test.git"
+  },
+  "keywords": [
+    "js",
+    "api",
+    "playwright"
+  ],
+  "author": "Quoc Bao Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QuocBaoNguyen11295/playwright_api_test/issues"
+  },
+  "homepage": "https://github.com/QuocBaoNguyen11295/playwright_api_test#readme",
+  "dependencies": {
+    "playwright": "^1.48.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
+  }
+}
