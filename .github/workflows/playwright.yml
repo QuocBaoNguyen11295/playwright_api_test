@@ -25,7 +25,14 @@ jobs:
         name: report
         path: playwright-report/
         retention-days: 30
-
+    - name: Check if report exists
+      run: |
+        if [ -d "playwright-report" ] && [ "$(ls -A playwright-report)" ]; then
+          echo "Report exists."
+        else
+          echo "No report found. Exiting."
+          exit 1
+        fi
     - uses: shallwefootball/s3-upload-action@master
       name: Upload S3
       id: S3
