@@ -20,12 +20,10 @@ test.describe('Login and access booking list', () => {
             expect(res.token).not.toBe(null)
         });
     })
-
     test('Get all booking list', async ({ request }) => {
         const res = await request.get("https://restful-booker.herokuapp.com/booking")
         expect(res.status()).toBe(200)
         const data = await res.json()
-        id = data[0].bookingid
         expect(data.length).toBeGreaterThanOrEqual(1000)
     })
 
